@@ -1,32 +1,53 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+ <div id="app"  class="back">
+  <v-app id="inspire">
+    <v-app-bar
+      app
+      light
+      tile
+
+    >
+      <v-btn icon>
+        <v-icon>mdi-silverware-fork-knife</v-icon>
+      </v-btn>
+      
+      <v-toolbar-title>Easy Eat</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-btn  tile outlined class="green--text text--lighten-3"
+      >
+        <span class="mr-2 text--disabled">Latest Release</span>
+        <v-icon>mdi-open-in-new</v-icon>
+      </v-btn>
+    </v-app-bar>
+    <v-content>
+      <router-view>
+
+      </router-view>
+    </v-content>
+  </v-app>
   </div>
 </template>
 
+<script>
+export default {
+  name: 'App',
+
+  components: {
+  },
+
+  data: () => ({
+    //
+  }),
+};
+</script>
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+.back {
+  background-image: url(./imgs/background_light.jpg);
+  background-repeat: repeat;
 }
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+#inspire {
+  background: none;
 }
 </style>
