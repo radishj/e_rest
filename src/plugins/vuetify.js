@@ -12,7 +12,7 @@ export default new Vuetify({
             accent: '#8c9eff',
             error: '#b71c1c',
             success: '#0aad0a'
-          },
-        },
+          }
+        }
       }
 });

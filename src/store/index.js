@@ -6,8 +6,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state:{
+        pageName:"Easy Eat",
+        pickedRestID:"",
         sys:{},
-        SERVER_URL:process.env.VUE_APP_SHOST+':'+process.env.VUE_APP_SPORT,
+        SERVER_URL:process.env.VUE_APP_SERVER_HOST+':'+process.env.VUE_APP_SERVER_PORT,
+        PRINTER_URL:process.env.VUE_APP_PRINTER_HOST+':'+process.env.VUE_APP_PRINTER_PORT+'/printer',
     },
     getters:{
     },

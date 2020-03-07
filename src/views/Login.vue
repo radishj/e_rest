@@ -46,10 +46,11 @@
 </template>
 
 <script>
+    import router from '../router';
     const axios = require('axios');
     export default {
         data: () => ({
-        name: 'Login',
+        pageName: 'Login',
         phone: '',
         passStr: String,
         rules: {
@@ -68,6 +69,7 @@
         },
 
         methods: {
+            async register() {},
             async login() {
                 var user = {
                     phone : this.phone,
@@ -75,12 +77,23 @@
                 };
                 //alert(this.$store.state.SERVER_URL+'/customer/login');
                 var res = await axios.post(this.$store.state.SERVER_URL+'/customer/login',user);
-                console.log(res.data);
-            },         
+                if(res.data.phone == this.phone)
+                {
+                    this.$store.state.sys = res.data;
+                    this.goNext('Restaurant');
+                }
+                //console.log(res.data);
+            },    
+            goNext(url){
+                router.push(url);
+            },     
             clear () {
                 this.phone = ''
                 this.password = ''
             }
-        } 
+        },
+        mounted(){
+            this.$store.state.pageName = this.pageName;
+        }
     }
 </script>

@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Start from '../views/Start.vue'
 import Login from '../views/Login.vue'
+import Restaurant from '../views/Restaurant.vue'
+import Menu from '../views/Menu.vue'
 //var cors = require('cors')
 //Vue.use(cors())
 Vue.use(VueRouter)
@@ -16,6 +18,16 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/restaurant',
+    name: 'Restaurant',
+    component: Restaurant
+  },
+  {
+    path: '/menu',
+    name: 'Menu',
+    component: Menu
   },
   {
     path: '/about',

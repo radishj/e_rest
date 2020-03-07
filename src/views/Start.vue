@@ -33,12 +33,16 @@
 import router from '../router';
 
 export default {
-  name: 'Start',
+  data: () => ({
+    pageName: 'Start'
+  }),
   methods:{
     goNext(url){
       router.push(url);
     },
+  },
+  mounted(){
+     this.$store.state.pageName = this.pageName;
   }
-
 }
 </script>
