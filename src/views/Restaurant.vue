@@ -45,13 +45,10 @@ export default {
         pageName: 'Restaurant'
     }),
     methods:{
-        goNext(url){
-            router.push(url);
-        },
         pickRest(restID)
         {
-            this.$store.state.pickRestID = restID;
-            router.push('Menu');
+            this.$store.state.pickedRestID = restID;
+            router.push('RestInfo');
         },
         /*trimStr(maxLength, str){
             if(str.length > maxLength){

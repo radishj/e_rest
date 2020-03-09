@@ -37,11 +37,33 @@
         </v-card>
         </v-col>
     </v-row>
+
+
+        <v-btn class="mx-2" fab dark small color="primary" @click="selected2=[]">
+      <v-icon dark>mdi-minus</v-icon>
+    </v-btn>
+        <v-select
+          v-model="selected2"
+          :items="items"
+          chips
+          label="Some Items"
+          multiple
+          outlined
+          cache-items
+          :menu-props="{ contentClass: 'red-first-item' }"
+        >
+        </v-select>
 </v-container>
 </template>
 
 <style scoped>
- 
+ .red-text {
+  color: red;
+}
+
+.red-first-item .v-list-item:first-child .v-list-item__title {
+  color: red;
+}
 </style>
 <script>
 // @ is an alias to /src
@@ -49,8 +71,11 @@ import router from '../router';
 
 export default {
     data: () => ({
-        pageName: 'Menu',
-        menu: {}
+        pageName: 'Dish Customize',
+        menu: {},
+        items: ['Item A', 'Item B', 'Item C'],
+      selected1: [],
+      selected2: []
     }),
     methods:{
         goNext(url){
@@ -63,7 +88,7 @@ export default {
         }
     },
     mounted(){
-        this.$store.state.pageName = 'Station #'+this.$store.state.pickedStationID+': '+this.$store.state.sys.stations[this.$store.state.pickedStationID].name;
+        this.$store.state.pageName = 'Customize';
         this.menu = Object.values(this.$store.state.sys.merchants[this.$store.state.pickedRestID].menus)[0];
     }
 }

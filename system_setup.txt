@@ -1,0 +1,28 @@
+﻿Install printer server in cell phone(Android)
+1. install Termux in Play Store
+2. open Termux
+3. install Nodejs 'pkg install nodejs'
+4. install GitHub 'pkg install git'
+5. download printer testing code 'git clone https://github.com/radishj/printer_test.git'
+6. go directory printer_test 'cd printer_test'
+7. instll 'npm install'
+8. run app 'node app.js'
+9. switch to chrome browser
+10. browse 'localhost:8081'
+
+Install&run Data server in Unix server 
+1. Open terminal window and go to root code folder
+2. run 'git clone https://github.com/radishj/e_rest_server.git'
+3. cd e_rest_server
+4. run 'npm install'
+5. run 'node app.js &'
+6. run 'disown' (to disconnect programm with terminal window)
+
+Install&run App server in Unix server 
+1. Open terminal window and go to root code folder
+2. run 'git clone https://github.com/radishj/e_rest.git'
+3. cd e_rest_server
+4. run 'npm install'
+5. run 'npm run build'
+6. serve -l tcp://mediavictoria.com:8080 -s dist &
+7. run 'disown' (to disconnect programm with terminal window)

@@ -3,7 +3,10 @@ import VueRouter from 'vue-router'
 import Start from '../views/Start.vue'
 import Login from '../views/Login.vue'
 import Restaurant from '../views/Restaurant.vue'
+import RestInfo from '../views/RestInfo.vue'
+import OrderDelivery from '../views/OrderDelivery.vue'
 import Menu from '../views/Menu.vue'
+import DishCustomize from '../views/DishCustomize.vue'
 //var cors = require('cors')
 //Vue.use(cors())
 Vue.use(VueRouter)
@@ -25,9 +28,24 @@ const routes = [
     component: Restaurant
   },
   {
+    path: '/restinfo',
+    name: 'RestInfo',
+    component: RestInfo
+  },
+  {
+    path: '/orderdelivery',
+    name: 'OrderDelivery',
+    component: OrderDelivery
+  },
+  {
     path: '/menu',
     name: 'Menu',
     component: Menu
+  },
+  {
+    path: '/dishcustomize',
+    name: 'DishCustomize',
+    component: DishCustomize
   },
   {
     path: '/about',
