@@ -56,10 +56,9 @@ export default {
         goNext(url){
             router.push(url);
         },
-        pickLoc(stationID)
+        pickProd(catID, prodID)
         {
-            this.$store.state.pickedStationID = stationID;
-            router.push('Menu');
+            router.push({ path: 'DishCustomize', params: { 'catID': catID, 'prodID': prodID} });
         }
     },
     mounted(){
