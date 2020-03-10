@@ -9,6 +9,7 @@
           outlined
           dense
           cache-items
+          item-color = "green"
           @change="itemChanged()"
           :rules="rules"
           :menu-props="{ contentClass: 'red-first-item' }"
@@ -34,15 +35,15 @@
         data: () => ({
             selectedOptions: [],
             s2_max:2,
-            total1:0
+            total:0
         }),
         methods:{
             itemChanged () {//alert(this.total);
-                var total=0;
+                var total1=0;
                 this.selectedOptions.forEach(function(v){
-                    total= total+v.price;
+                    total1= total1+v.price;
                 })
-                this.total1 = total;
+                this.total = total1;
             },
         },
         computed: {
@@ -77,5 +78,6 @@
     .red-first-item .v-list-item:first-child .v-list-item__title {
         color: red;
     }
-
+.v-list-item--link::before { background-color: red; }
+.v-chip__content{ color: red;}
 </style>
