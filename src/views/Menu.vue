@@ -58,7 +58,7 @@ export default {
         },
         pickProd(catID, prodID)
         {
-            router.push({ path: 'DishCustomize', params: { 'catID': catID, 'prodID': prodID} });
+            router.push({ name: 'DishCustomize', params: { 'catID': catID, 'prodID': prodID} });
         }
     },
     mounted(){
