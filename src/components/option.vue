@@ -10,6 +10,7 @@
           dense
           cache-items
           item-color = "green"
+          deletable-chips = true
           @change="itemChanged()"
           :rules="rules"
           :menu-props="{ contentClass: 'red-first-item' }"
