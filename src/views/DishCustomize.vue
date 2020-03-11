@@ -9,7 +9,7 @@
     <div class = "box" style="">
         <v-icon @click="plusOne" class="my-3 mx-3 text--darken-6">mdi-plus-circle</v-icon>
         <p class="mt-2 mx-1 font-size-26">{{dishCount}}</p>
-        <v-icon  @click="minusOne" class="text--darken-6 mx-3">mdi-minus-circle</v-icon>
+        <v-icon @click="minusOne" class="text--darken-6 mx-3">mdi-minus-circle</v-icon>
     </div>
     <v-spacer></v-spacer>
     <p class="mt-4 ml-2 font-size-22">        Total: ${{allTotal}}</p>

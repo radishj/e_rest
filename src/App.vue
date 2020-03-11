@@ -15,10 +15,10 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon class="grey--text">
+      <!--v-btn-- icon class="grey--text">
         <v-icon class="mx-0">mdi-magnify</v-icon>
-      </v-btn>
-      <v-btn icon class="grey--text">
+      </!--v-btn-->
+      <v-btn icon class="grey--text" v-if="$store.state.pageName=='Start'||$store.state.pageName=='Login'">
         <v-icon>mdi-qrcode-scan</v-icon>
       </v-btn>
     </v-app-bar>
