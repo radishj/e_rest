@@ -63,7 +63,7 @@ export default {
         }*/
     },
     mounted(){
-        this.$store.state.pageName = this.pageName;
+        this.$store.state.pageName = this.pageName;console.log(this.$store.state.pageName);
     }
 }
 </script>

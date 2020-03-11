@@ -21,6 +21,12 @@
       <v-btn icon class="grey--text" v-if="$store.state.pageName=='Start'||$store.state.pageName=='Login'">
         <v-icon>mdi-qrcode-scan</v-icon>
       </v-btn>
+      <v-btn text  v-if="$store.state.pageName!='Start' && $store.state.pageName!='Login'">
+          <v-badge left color="green">
+            <span slot="badge">2</span>
+            <v-icon>mdi-cart-outline</v-icon> 
+          </v-badge>
+        </v-btn>
     </v-app-bar>
     <v-content>
       <router-view>
