@@ -6,19 +6,15 @@
     fixed
     horizontal
 >
-    <v-btn class="" @click="plusOne">
-    <v-icon  class="green lighten-3 text--darken-6">mdi-plus</v-icon>
-    </v-btn>
+    <div class = "box" style="">
+        <v-icon @click="plusOne" class="my-3 mx-3 text--darken-6">mdi-plus-circle</v-icon>
+        <p class="mt-2 mx-1 font-size-26">{{dishCount}}</p>
+        <v-icon  @click="minusOne" class="text--darken-6 mx-3">mdi-minus-circle</v-icon>
+    </div>
+    <v-spacer></v-spacer>
+    <p class="mt-4 ml-2 font-size-22">        Total: ${{allTotal}}</p>
 
-    <p class="mt-2 mr-2 font-size-26">{{dishCount}}</p>
-
-    <v-btn class="mx-0" @click="minusOne">
-    <v-icon  class="green lighten-3 text--darken-6">mdi-minus</v-icon>
-    </v-btn>
-
-    <p class="mt-4 ml-2 font-size-22">Total: ${{allTotal}}</p>
-
-<v-spacer></v-spacer>
+    <v-spacer></v-spacer>
 
     <v-btn
       color="green"
@@ -98,14 +94,7 @@
 .v-btn__content{
     font-size:18px;
 }
-.v-btn:not(.v-btn--round).v-size--default {
-    padding-left: 6px;
-    padding-right: 0px;
-}
-.v-item-group.v-bottom-navigation--horizontal .v-btn > .v-btn__content > .v-icon {
-    margin-bottom: 0;
-    margin-right: 4px;
-}
+
 
 </style>
 <script>
