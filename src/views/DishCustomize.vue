@@ -1,10 +1,6 @@
 <template>
 <v-app>
-<v-card
-    class="overflow-hidden mx-auto"
-    height="1500px"
-    max-width="100%"
->
+
 <v-bottom-navigation
     scroll-target="#scroll-area-1"
     fixed
@@ -14,7 +10,7 @@
     <v-icon  class="green lighten-3 text--darken-6">mdi-plus</v-icon>
     </v-btn>
 
-    <p class="mt-2 mr-5 font-size-26">{{dishCount}}</p>
+    <p class="mt-2 mr-2 font-size-26">{{dishCount}}</p>
 
     <v-btn class="mx-0" @click="minusOne">
     <v-icon  class="green lighten-3 text--darken-6">mdi-minus</v-icon>
@@ -26,7 +22,7 @@
 
     <v-btn
       color="green"
-      class="mr-2 lighten-1"
+      class="mr-2 pr-2 lighten-1"
       @click="validate"
     >
       Add to Cart
@@ -38,8 +34,8 @@
     class="overflow-y-auto"
     max-height="600"
 >
-<v-container fill-height class="align-start">
-    <div  class="white">
+<v-container>
+    <div>
     <v-form
         ref="form"
         v-model="valid"
@@ -79,7 +75,7 @@
     </div>
 </v-container>
 </v-sheet>
-</v-card>
+
 </v-app>
 </template>
 
@@ -102,6 +98,15 @@
 .v-btn__content{
     font-size:18px;
 }
+.v-btn:not(.v-btn--round).v-size--default {
+    padding-left: 6px;
+    padding-right: 0px;
+}
+.v-item-group.v-bottom-navigation--horizontal .v-btn > .v-btn__content > .v-icon {
+    margin-bottom: 0;
+    margin-right: 4px;
+}
+
 </style>
 <script>
 // @ is an alias to /src
