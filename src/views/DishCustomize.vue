@@ -15,6 +15,13 @@
     />
     <v-row dense class="pl-2 pt-2">
         <v-col cols="12" class="py-0">
+            <Option
+                :label="dish.name"
+                :items= "dish.options"
+                :selectedOptions= "defaultItems"
+                :len_min= 1
+                :len_max= 2
+            />  
             <v-card class="d-flex flex-no-wrap justify-left green lighten-3">
                 <div style="width:100%" class="ma-2 d-flex flex-column">
                     <p class="mb-0 tm green--lighten--2 font-weight-bold">{{dish.name}}</p>
@@ -76,6 +83,7 @@ export default {
     data: () => ({
         pageName: 'Customize',
         dish: {},
+        options: [],
         total1:0,
         items: [{text:'Item A',value:{id:0,price:10}},{text:'Item B',value:{id:1,price:20}},{text:'Item C',value:{id:2,price:30}}],
         defaultItems:[{text:'Item A',value:{id:0,price:10}}]
@@ -88,10 +96,14 @@ export default {
         {
             this.$store.state.pickedStationID = stationID;
             router.push('dish');
-        }
+        },
     },
     mounted(){
         this.dish = Object.values(this.$store.state.sys.merchants[this.$store.state.pickedRestID].menus)[0].categories[this.$route.params.catID].products[this.$route.params.prodID];
+        this.dish.options.forEach(function (opt, index){
+            this.options.push({})
+        });
+
         //this.dish = Object.values(this.$store.state.sys.merchants[this.$store.state.pickedRestID].menus)[0].categories;
         this.$store.state.pageName = this.pageName;
     }
