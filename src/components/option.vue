@@ -1,63 +1,58 @@
 <template>
-    <div>
-        <v-select
-          v-model="selectedOptions"
-          :items="items"
-          chips
-          :label="label"
-          multiple
-          outlined
-          dense
-          cache-items
-          item-color = "green"
-          deletable-chips = true
-          @change="itemChanged()"
-          :rules="rules"
-          :menu-props="{ contentClass: 'red-first-item' }"
-        >
-          <template v-slot:prepend-item>
-            <v-list-item>
-              <span class="red-text">Red item</span>
-            </v-list-item>
-          </template>
-        </v-select>
-    <p>{{total1}}</p>
-     </div>
-   
+    <v-select
+        v-model="selectedItems"
+        :items="items"
+        chips
+        append-icon = "mdi-plus"
+        width="100%"
+        :label="label"
+        :hint="hint"
+        persistent-hint
+        multiple
+        outlined
+        dense
+        cache-items
+        color = "green"
+        item-color = "green"
+        deletable-chips
+        @change="itemChanged()"
+        :rules="rules"
+        :menu-props="{ contentClass: 'red-first-item' }"
+    >
+        <template v-slot:prepend-item>
+        <v-list-item>
+            <span class="green-text">{{label}}</span>
+        </v-list-item>
+        </template>
+    </v-select>
 </template>
 
 <script>
     export default {
         name: 'Button',
         props: {
+            id: Number,
             label: String,
+            hint: String,
             items: Array,
-            selectedOptions: Array,
+            selectedItems: Array,
             len_max: Number,
             len_min: Number
         },
-        data: () => ({
-            
-            total:0
+        data: () => ({          
         }),
         methods:{
             itemChanged () {//alert(this.total);
-                var total1=0;
-                this.selectedOptions.forEach(function(v){
-                    total1= total1+v.price;
-                })
-                this.total = total1;
+                var total=0;
+                this.selectedItems.forEach(function(v){
+                    total= total+v.price;
+                });
+                //alert([this.id,total].toString());
+                this.$emit('total-changed', [this.id,total]);
             },
         },
         computed: {
-            ggg(){
-                this.selectedOptions.forEach(function(v){
-                    alert(v.price);
-                    this.total1= this.total1+v.price;
-                })
-                return this.total1;
-            },
-            rules () {
+           rules () {
                 const rules = [];
                 if (this.len_min) {
                 const ruleLenMin =
@@ -73,18 +68,19 @@
                 }
                 return rules;
             }
+        },
+        mounted(){
+            console.dir('items111111:'+this.hint)
         }
     }
 </script>
 
 <style scoped>
-    .red-text {
-        color: red;
+    .green-text {
+        color: green;
     }
 
     .red-first-item .v-list-item:first-child .v-list-item__title {
         color: red;
     }
-.theme--light.v-chip:not(.v-chip--active) { background-color: green; }
-.v-chip__content{ color: red;}
 </style>
