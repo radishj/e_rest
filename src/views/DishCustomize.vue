@@ -2,9 +2,11 @@
 <v-container fill-height class="align-start">
     <div  class="white">
     <Option
-        :type="'success'"
         :label="'my button1'"
         :items= "items"
+        :selectedOptions= "defaultItems"
+        :len_min= 1
+        :len_max= 2
     />
     <Option
         :type="'success'"
@@ -75,7 +77,8 @@ export default {
         pageName: 'Customize',
         dish: {},
         total1:0,
-        items: [{text:'Item A',value:{id:0,price:10}},{text:'Item B',value:{id:1,price:20}},{text:'Item C',value:{id:2,price:30}}]
+        items: [{text:'Item A',value:{id:0,price:10}},{text:'Item B',value:{id:1,price:20}},{text:'Item C',value:{id:2,price:30}}],
+        defaultItems:[{text:'Item A',value:{id:0,price:10}}]
     }),
     methods:{
         goNext(url){

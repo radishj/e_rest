@@ -31,11 +31,13 @@
         name: 'Button',
         props: {
             label: String,
-            items: Array
+            items: Array,
+            selectedOptions: Array,
+            len_max: Number,
+            len_min: Number
         },
         data: () => ({
-            selectedOptions: [],
-            s2_max:2,
+            
             total:0
         }),
         methods:{
@@ -57,13 +59,17 @@
             },
             rules () {
                 const rules = [];
-
-                if (this.s2_max) {
-                const rule =
-                    v => (v || '').length <= this.s2_max ||
-                    `A maximum of ${this.s2_max} items is allowed`
-
-                rules.push(rule)
+                if (this.len_min) {
+                const ruleLenMin =
+                    v => (v || '').length >= this.len_min ||
+                    `A minmum of ${this.len_min} items is required`
+                rules.push(ruleLenMin)
+                }
+                if (this.len_max) {
+                const ruleLenMax =
+                    v => (v || '').length <= this.len_max ||
+                    `A maximum of ${this.len_max} items is allowed`
+                rules.push(ruleLenMax)
                 }
                 return rules;
             }
@@ -79,6 +85,6 @@
     .red-first-item .v-list-item:first-child .v-list-item__title {
         color: red;
     }
-.v-list-item--link::before { background-color: red; }
+.theme--light.v-chip:not(.v-chip--active) { background-color: green; }
 .v-chip__content{ color: red;}
 </style>
