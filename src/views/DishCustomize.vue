@@ -27,8 +27,16 @@
     <v-row dense class="pl-2 pt-2">
         <v-col cols="12" class="py-0">
             <v-card class="d-flex flex-no-wrap mr-2 mb-2" outlined>
-                <div style="width:100%" class="ma-2 d-flex flex-column">
-                    <p class="mb-0 tm green--text text--darken-4 font-weight-bold">{{dish.name}} - ${{dish.price}}</p>
+                <v-avatar
+                        class="ma-1"
+                        size="90"
+                        tile
+                    >
+                        <v-img class="" :src="dish.photoUrl"></v-img>
+                </v-avatar>
+                <div style="width:100%" class="ml-3 mt-1 d-flex flex-column"><!-- align-self-center align-center"-->
+                    <p class="mb-0 tm green--text text--darken-4 font-weight-bold">{{dish.name}}</p>
+                    <p class="mb-0 tm green--text text--darken-4 font-weight-bold">Price: ${{dish.price}}</p>
                 </div>
             </v-card>
         </v-col>
@@ -124,7 +132,6 @@ export default {
         {
             var theTotal = this.dish.price;
             this.selectedOptions.forEach(function (opt){
-                console.log('jjjjjjjjjjjj:'+JSON.stringify(opt))
                 if(opt)
                     opt.forEach(item => theTotal += item.price);
             })
