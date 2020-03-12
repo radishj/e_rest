@@ -5,7 +5,6 @@
       app
       light
       tile
-
     >
       <v-btn icon>
         <v-icon>mdi-silverware-fork-knife</v-icon>
@@ -21,9 +20,9 @@
       <v-btn icon class="grey--text" v-if="$store.state.pageName=='Start'||$store.state.pageName=='Login'">
         <v-icon>mdi-qrcode-scan</v-icon>
       </v-btn>
-      <v-btn text  v-if="$store.state.pageName!='Start' && $store.state.pageName!='Login'">
+      <v-btn text  @click="goNext('shoppingCart')" v-if="$store.state.pageName!='Start' && $store.state.pageName!='Login'">
           <v-badge left color="green">
-            <span slot="badge">2</span>
+            <span slot="badge">{{$store.state.cartItemCount}}</span>
             <v-icon>mdi-cart-outline</v-icon> 
           </v-badge>
         </v-btn>
@@ -38,6 +37,7 @@
 </template>
 
 <script>
+import router from 'router';
 export default {
   name: 'App',
 
@@ -47,6 +47,11 @@ export default {
   data: () => ({
     //
   }),
+  methods:{
+    goNext(url){
+      router.push(url);
+    },
+  }
 };
 </script>
 <style>

@@ -43,12 +43,8 @@
         }),
         methods:{
             itemChanged () {//alert(this.total);
-                var total=0;
-                this.selectedItems.forEach(function(v){
-                    total= total+v.price;
-                });
-                //alert([this.id,total].toString());
-                this.$emit('total-changed', [this.id,total]);
+                //console.log(JSON.stringify(this.selectedItems));
+                this.$emit('total-changed', {id:this.id,'items':this.selectedItems});
             },
         },
         computed: {
@@ -70,7 +66,6 @@
             }
         },
         mounted(){
-            console.dir('items111111:'+this.hint)
         }
     }
 </script>

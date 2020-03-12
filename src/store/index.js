@@ -12,6 +12,7 @@ export default new Vuex.Store({
         sys:{},
         SERVER_URL:process.env.VUE_APP_SERVER_HOST+':'+process.env.VUE_APP_SERVER_PORT,
         PRINTER_URL:process.env.VUE_APP_PRINTER_HOST+':'+process.env.VUE_APP_PRINTER_PORT+'/printer',
+        cartItemCount:0
     },
     getters:{
     },

@@ -19,7 +19,7 @@
     <v-btn
       color="green"
       class="mr-2 pr-2 lighten-1"
-      @click="validate"
+      @click="addDish"
     >
       Add to Cart
     </v-btn>
@@ -110,7 +110,7 @@ export default {
         dish: {},
         items: [],
         defaultItems:[],
-        totals:[],
+        selectedOptions:[],
         dishTotal:0,
         dishCount:1,
         allTotal:0
@@ -125,19 +125,24 @@ export default {
             router.push('dish');
         },
         onTotalChanged: function(data){
-            this.totals[data[0]] = data[1];
+            this.selectedOptions[data.id] = data;
+            console.log(JSON.stringify(this.selectedOptions));
             this.getDishTotal();
         },
         getDishTotal()
         {
             var theTotal = this.dish.price;
-            if(this.totals.length>0)
-                theTotal += this.totals.reduce((a, b) => a + b);
+            this.selectedOptions.forEach(function (opt){
+                if(item.items.length>0)
+                    theTotal+=item.items.reduce((a,b) => a.price+b.price);
+            })
             this.dishTotal = theTotal;
             this.allTotal = this.dishTotal * this.dishCount;
         },
-        validate () {
-            alert(this.$refs.form.validate());
+        addDish(){
+            if(this.$refs.form.validate()){
+                this.$store.state.cartItemCount++;
+            }
         },
         plusOne(){
             this.dishCount++;
@@ -166,7 +171,7 @@ export default {
                 if(item.price > 0){
                     priceStr = ' - $'+item.price.toString();
                 }
-                var newItem = {text:item.name+priceStr,value:{id:i,price:item.price}};
+                var newItem = {text:item.name+priceStr,value:{id:i,name:item.name,price:item.price}};
                 newItems.push(newItem);
                 if(defaultLen>0){
                     newDefaultItems.push(newItem);
