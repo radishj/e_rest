@@ -1,6 +1,5 @@
 <template>
-<v-app>
-
+<div>
 <v-bottom-navigation
     scroll-target="#scroll-area-1"
     fixed
@@ -25,54 +24,45 @@
     </v-btn>
 </v-bottom-navigation>
 
-<v-sheet
-    id="scroll-area-1"
-    class="overflow-y-auto"
-    max-height="600"
->
-<v-container>
-    <div>
+    <v-row dense class="pl-2 pt-2">
+        <v-col cols="12" class="py-0">
+            <v-card class="d-flex flex-no-wrap mr-2 mb-2" outlined>
+                <div style="width:100%" class="ma-2 d-flex flex-column">
+                    <p class="mb-0 tm green--text text--darken-4 font-weight-bold">{{dish.name}} - ${{dish.price}}</p>
+                </div>
+            </v-card>
+        </v-col>
+        <v-col cols="12" class="px-2 py-1">
+            <div>
+                <p class="mb-0 tm grey--text text--darken-2">{{dish.description}}</p>
+            </div>
+        </v-col>
+    </v-row>
     <v-form
         ref="form"
         v-model="valid"
         lazy-validation
     >
-    <v-row dense class="pl-2 pt-2">
-        <v-col cols="12" class="py-0">
-            <v-card class="d-flex flex-no-wrap justify-left green lighten-3">
-                <div style="width:100%" class="ma-2 d-flex flex-column">
-                    <p class="mb-0 tm green--lighten--2 font-weight-bold">{{dish.name}} - ${{dish.price}}</p>
-                    <p class="mb-0 tm green--lighten--2">{{dish.description}}</p>
-                </div>
-            </v-card>
-        </v-col>
-    </v-row>
-    <v-row dense class="pl-2 pt-2" 
+    <v-row dense class="px-2 pt-2" 
         v-for="(opt, i) in dish.options"
         :key="i"
      >
         <v-col cols="12" class="py-0">
-            <v-card class="d-flex flex-no-wrap px-1" tile>
                 <Option  class="mt-3"
                     :id = i
-                    :label="opt.name"
+                    :label="opt.name + ' -- ' + opt.description"
                     :hint="opt.description"
-                    :items= "items[i]"
-                    :selectedItems= "defaultItems[i]"
+                    :items= "options[i]"
+                    :selectedItems= "selectedOptions[i]"
                     :len_min= "opt.minCount"
                     :len_max= "opt.maxCount"
                     v-on:total-changed = "onTotalChanged"
                 />
-            </v-card>
         </v-col>
     </v-row>
 
   </v-form>
-    </div>
-</v-container>
-</v-sheet>
-
-</v-app>
+</div>
 </template>
 
 <style>
@@ -108,8 +98,9 @@ export default {
     data: () => ({
         pageName: 'Customize',
         dish: {},
-        items: [],
-        defaultItems:[],
+        dishInfo: '',
+        options: [],
+        defaultOptions:[],
         selectedOptions:[],
         dishTotal:0,
         dishCount:1,
@@ -125,16 +116,17 @@ export default {
             router.push('dish');
         },
         onTotalChanged: function(data){
-            this.selectedOptions[data.id] = data;
-            console.log(JSON.stringify(this.selectedOptions));
+            this.selectedOptions[data.id] = data.items;
+           // console.log(JSON.stringify(this.selectedOptions));
             this.getDishTotal();
         },
         getDishTotal()
         {
             var theTotal = this.dish.price;
             this.selectedOptions.forEach(function (opt){
-                if(item.items.length>0)
-                    theTotal+=item.items.reduce((a,b) => a.price+b.price);
+                console.log('jjjjjjjjjjjj:'+JSON.stringify(opt))
+                if(opt)
+                    opt.forEach(item => theTotal += item.price);
             })
             this.dishTotal = theTotal;
             this.allTotal = this.dishTotal * this.dishCount;
@@ -161,9 +153,10 @@ export default {
         this.dish.options.forEach(function (opt){
             var newItems = [];
             var newDefaultItems = [];
-            var total = 0;
-            ref.items.push(newItems);
-            ref.defaultItems.push(newDefaultItems);
+            var newSelectedItems = [];
+            ref.options.push(newItems);
+            ref.defaultOptions.push(newDefaultItems);
+            ref.selectedOptions.push(newSelectedItems);
             var defaultLen = opt.minCount;
             var i = 0;
             opt.items.forEach(function (item){
@@ -171,22 +164,20 @@ export default {
                 if(item.price > 0){
                     priceStr = ' - $'+item.price.toString();
                 }
-                var newItem = {text:item.name+priceStr,value:{id:i,name:item.name,price:item.price}};
-                newItems.push(newItem);
+                var newDefaultItem = {text:item.name+priceStr,value:{id:i,name:item.name,price:item.price}};
+                newItems.push(newDefaultItem);
                 if(defaultLen>0){
-                    newDefaultItems.push(newItem);
-                    total += newItem.value.price;
+                    newDefaultItems.push(newDefaultItem);
+                    newSelectedItems.push({id:i,name:item.name,price:item.price});
                     defaultLen--;
                 }
                 i++;
             })
-            ref.totals.push(total);
         });
         //this.dish = Object.values(this.$store.state.sys.merchants[this.$store.state.pickedRestID].menus)[0].categories;
         //console.dir('items0:'+JSON.stringify(this.items[0])); 
         //console.dir('totals:'+JSON.stringify(this.totals)); 
         this.getDishTotal();
-        this.allTotal = this.dishTotal * this.dishCount;
         this.$store.state.pageName = this.dish.name;
     }
 }

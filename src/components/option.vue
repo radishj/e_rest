@@ -2,27 +2,22 @@
     <v-select
         v-model="selectedItems"
         :items="items"
-        chips
         append-icon = "mdi-plus"
         width="100%"
         :label="label"
         :hint="hint"
-        persistent-hint
         multiple
-        outlined
         dense
         cache-items
         color = "green"
         item-color = "green"
-        deletable-chips
         @change="itemChanged()"
+        @input="limiter"
         :rules="rules"
-        :menu-props="{ contentClass: 'red-first-item' }"
     >
-        <template v-slot:prepend-item>
-        <v-list-item>
-            <span class="green-text">{{label}}</span>
-        </v-list-item>
+        <template v-slot:selection="{ item, index }">
+            <span v-if="index === selectedItems.length-1">{{ item.text }}</span>
+            <span style="margin-right:0.5em;" v-if="index !== selectedItems.length-1">{{item.text}}, </span>
         </template>
     </v-select>
 </template>
@@ -42,10 +37,17 @@
         data: () => ({          
         }),
         methods:{
+            limiter(e) {
+                if(e.length > this.len_max) {
+                    alert(`A maximum of ${this.len_max} items alread selected`);
+                    e.pop()
+                }
+            },
             itemChanged () {//alert(this.total);
                 //console.log(JSON.stringify(this.selectedItems));
                 this.$emit('total-changed', {id:this.id,'items':this.selectedItems});
             },
+            fff(){return false;}
         },
         computed: {
            rules () {
@@ -59,7 +61,7 @@
                 if (this.len_max) {
                 const ruleLenMax =
                     v => (v || '').length <= this.len_max ||
-                    `A maximum of ${this.len_max} items is allowed`
+                    `A maximum of ${this.len_max} items alread selected`
                 rules.push(ruleLenMax)
                 }
                 return rules;
@@ -74,8 +76,7 @@
     .green-text {
         color: green;
     }
-
-    .red-first-item .v-list-item:first-child .v-list-item__title {
-        color: red;
+    .v-input {
+        font-size:14px;
     }
 </style>

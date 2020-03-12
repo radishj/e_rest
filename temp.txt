@@ -63,3 +63,26 @@ new Vue({
     }
   }
 })
+
+
+dish card:  can be insert with "<span v-html="ttt"></span>"
+<v-card class="d-flex flex-no-wrap mr-2 mb-2" outlined>
+                <div style="width:100%" class="ma-2 d-flex flex-column">
+                    <p class="mb-0 tm green--text text--darken-4 font-weight-bold">{{dish.name}} - ${{dish.price}}</p>
+                    <span
+                        v-for="(opt, i) in dish.options"
+                        :key="i"
+                        style = "font-size:14px;"
+                    >
+                        {{opt.name}}:
+                        <span
+                        v-for="(item, j) in selectedOptions[i]"
+                        :key="j"
+                        class = "py-0"
+                        style = "font-size:14px;"
+                        >
+                            {{j==selectedOptions[i].length-1?item.text+',':item.text}}   
+                        </span>
+                    </span>
+                </div>
+            </v-card>
