@@ -7,8 +7,8 @@
         <v-col cols="12" class="py-0">
             <v-card class="d-flex flex-no-wrap justify-left green lighten-4" tile>
                 <div style="width:100%" class="mt-2 mb-1 d-flex flex-column">
-                    <p class="mb-0 tm green--lighten--2 text-center font-weight-bold">{{menu.categories[catID].name}}</p>
-                    <p class="mb-0 tm green--lighten--2 text-center">{{menu.categories[catID].description}}</p>
+                    <p class="mb-0 green--lighten--2 text-center font-weight-bold">{{menu.categories[catID].name}}</p>
+                    <p class="mb-0 green--lighten--2 text-center">{{menu.categories[catID].description}}</p>
                 </div>
             </v-card>
         </v-col>
@@ -62,8 +62,11 @@ export default {
         }
     },
     mounted(){
+        //console.log('Station #'+this.$store.state.pickedStationID+': '+ JSON.stringify(this.$store.state.sys.stations));
+        //console.log('menu:'+JSON.stringify(this.$store.state.sys.merchants[this.$store.state.pickedRestID].menus));
         this.$store.state.pageName = 'Station #'+this.$store.state.pickedStationID+': '+this.$store.state.sys.stations[this.$store.state.pickedStationID].name;
         this.menu = Object.values(this.$store.state.sys.merchants[this.$store.state.pickedRestID].menus)[0];
+        //console.log('menu:'+JSON.stringify(this.$store.state.sys.merchants[this.$store.state.pickedRestID].menus));
     }
 }
 </script>

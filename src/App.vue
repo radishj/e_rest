@@ -20,9 +20,9 @@
       <v-btn icon class="grey--text" v-if="$store.state.pageName=='Start'||$store.state.pageName=='Login'">
         <v-icon>mdi-qrcode-scan</v-icon>
       </v-btn>
-      <v-btn text  @click="goNext('shoppingCart')" v-if="$store.state.pageName!='Start' && $store.state.pageName!='Login'">
+      <v-btn text  @click="goNext('Checkout')" v-if="$store.state.pageName!='Start' && $store.state.pageName!='Login'">
           <v-badge left color="green">
-            <span slot="badge">{{$store.state.cartItemCount}}</span>
+            <span slot="badge">{{$store.state.cartDishes.length}}</span>
             <v-icon>mdi-cart-outline</v-icon> 
           </v-badge>
         </v-btn>

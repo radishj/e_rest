@@ -11,14 +11,14 @@
         <v-icon @click="minusOne" class="mx-3" color="green">mdi-minus-circle</v-icon>
     </div>
     <v-spacer></v-spacer>
-    <p class="mt-4 ml-2 font-size-22">        Total: ${{allTotal}}</p>
+    <p class="mt-4 ml-2 font-size-22">        Total: ${{allTotal.toFixed(2)}}</p>
 
     <v-spacer></v-spacer>
 
     <v-btn
       color="green"
       class="mr-2 pr-2 white--text" 
-      @click="addDish"
+      @click="addToCart"
       small
     >
       <span class="white--text">Add to Cart</span>
@@ -37,7 +37,7 @@
                 </v-avatar>
                 <div style="width:100%" class="ml-3 mt-1 d-flex flex-column"><!-- align-self-center align-center"-->
                     <p class="mb-0 tm green--text text--darken-4 font-weight-bold">{{dish.name}}</p>
-                    <p class="mb-0 tm green--text text--darken-4 font-weight-bold">Price: ${{dish.price}}</p>
+                    <p class="mb-0 tm green--text text--darken-4 font-weight-bold">Price: ${{dish.price.toFixed(2)}}</p>
                 </div>
             </v-card>
         </v-col>
@@ -113,7 +113,8 @@ export default {
         selectedOptions:[],
         dishTotal:0,
         dishCount:1,
-        allTotal:0
+        allTotal:0,
+        cartDishes:{}
     }),
     methods:{
         goNext(url){
@@ -139,10 +140,29 @@ export default {
             this.dishTotal = theTotal;
             this.allTotal = this.dishTotal * this.dishCount;
         },
-        addDish(){
+        addToCart(){
             if(this.$refs.form.validate()){
-                this.$store.state.cartItemCount++;
+                var optionNames=[];
+                for( var i = this.selectedOptions.length-1; i>=0; i--){
+                    if ( this.selectedOptions[i].length === 0)
+                        this.selectedOptions.splice(i, 1);
+                    else
+                        optionNames.unshift(this.dish.options[i].name);
+                }
+                var dish = {
+                    name:this.dish.name, 
+                    price:this.dish.price,
+                    total:this.allTotal,
+                    optionNames:optionNames,
+                    options:this.selectedOptions
+                }
+                this.$store.state.cartDishes.push(dish);
+                this.cartDishes = this.$store.state.cartDishes;
+                this.goNext("menu");
+                //console.log('dish length:'+this.$store.cartDishes.length);
             }
+            else
+                return false;
         },
         plusOne(){
             this.dishCount++;
