@@ -73,6 +73,12 @@ align-items:left;
 .tBold {
     font-weight: bold;  
 }
+.tll {
+    font-size: 2.5em;
+    }
+.tl {
+    font-size: 1.5em;
+    }
 .tm {
     font-size: 0.9em;
     }

@@ -8,6 +8,7 @@ import OrderDelivery from '../views/OrderDelivery.vue'
 import Menu from '../views/Menu.vue'
 import DishCustomize from '../views/DishCustomize.vue'
 import Checkout from '../views/Checkout.vue'
+import CardCharging from '../views/CardCharging.vue'
 //var cors = require('cors')
 //Vue.use(cors())
 Vue.use(VueRouter)
@@ -52,6 +53,11 @@ const routes = [
     path: '/checkout',
     name: 'Checkout',
     component: Checkout
+  },
+  {
+    path: '/cardcharging',
+    name: 'CardCharging',
+    component: CardCharging
   },
   {
     path: '/about',

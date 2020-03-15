@@ -17,7 +17,7 @@
         <v-btn
             color="green"
             class="mr-2 pr-2 white--text" 
-            @click="submitOrder"
+            @click="goNext('cardcharging')"
         >
             <v-icon color="yellow lighten-3" right>mdi-credit-card-settings-outline</v-icon>
             <span class="white--text">Submit Order</span>
@@ -68,7 +68,7 @@
         <div class="d-flex flex-row mr-6">
             <p style="margin-bottom:0px margin-bottom:10px">Items Price</p>
             <v-spacer></v-spacer>
-            <p>{{dishes.reduce((a, b)=> ({'total':a.total+b.total})).total.toFixed(2)}}</p>
+            <p>{{setTotal()}}</p>
             <v-icon class="ml-2 mr-1 pb-0 top--20" color="green"></v-icon>
         </div>
         <div class="d-flex flex-row mr-6">
@@ -84,7 +84,7 @@
             <v-icon class="ml-2 mr-1 pb-0 top--20" color="green"></v-icon>
         </div>
         <div class="d-flex flex-row mr-6">
-            <p style="margin-bottom:0px margin-bottom:10px">Customer Name</p>
+            <p style="margin-bottom:0px margin-bottom:10px">Customer Cell</p>
             <v-spacer></v-spacer>
             <p>{{sys.phone}}</p>
             <v-icon class="ml-2 mr-1 pb-0 top--20" color="green"></v-icon>
@@ -134,6 +134,11 @@ export default {
     methods:{
         goNext(url){
             router.push(url);
+        },
+        setTotal(){
+            var total = this.dishes.reduce((a, b)=> ({'total':a.total+b.total})).total.toFixed(2);
+            this.$store.state.sys.payment = {'total': total};
+            return total;
         },
         refreshPage(dishID){
             this.$store.state.cartDishes.splice(dishID, 1);

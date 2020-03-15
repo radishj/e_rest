@@ -62,11 +62,17 @@
                 return timeStr;
             },
             async recPrint(){
-                var data = {
-                    name: 'test'
+                var testdata = {
+                    name: 'test',
+                    test:'abc'
                 }
                 alert(this.$store.state.PRINTER_URL);
-                var res = await axios.post(this.$store.state.PRINTER_URL,data);
+                const config = {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }
+                var res = await axios.post(this.$store.state.PRINTER_URL,testdata,config);
                 alert(res.toString());
             },
         },
